@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReducer } from "react";
+
+import { CartContext, cartReducer, cartInit } from "./store";
+
+import "./assets/App.css";
+
+import Products from "./components/Products";
+
+import Navbar from "./components/Navbar";
+
+import Cart from "./components/Cart";
 
 function App() {
+  const reducer = useReducer(cartReducer, cartInit);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CartContext.Provider value={reducer}>
+        <Navbar />
+        <div className="w-full flex">
+          <Products />
+          <Cart />
+        </div>
+      </CartContext.Provider>
+    </>
   );
 }
 
