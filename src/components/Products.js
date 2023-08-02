@@ -48,6 +48,7 @@ const Cart = () => {
                   },
                 });
               }}
+              value={qty}
             >
               {[...Array(99)].map((item, index) => {
                 return (
@@ -65,7 +66,6 @@ const Cart = () => {
 
                 // 請問這裡是否有更好的寫法?
                 document.querySelectorAll("select").forEach((item) => {
-                  console.log(item);
                   item.value = 1;
                 });
 
