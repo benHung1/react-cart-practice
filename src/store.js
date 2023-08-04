@@ -12,6 +12,7 @@ export const cartInit = {
 export const cartReducer = (state, action) => {
   const cartList = [...state.cartList];
   const index = cartList.findIndex((item) => item.id === action.payload.id);
+  const newQty = action.payload.qty || 1;
 
   switch (action.type) {
     case "ADD_TO_CART":
@@ -26,12 +27,11 @@ export const cartReducer = (state, action) => {
         }
       }
 
-      // document.querySelector("select").value = action.payload.qty;
-
       return {
         ...state,
         cartList,
         total: totalPrice(cartList),
+        newQty: newQty,
       };
 
     case "CHANGE_SELECT_QTY":
@@ -41,6 +41,7 @@ export const cartReducer = (state, action) => {
         ...state,
         cartList,
         total: totalPrice(cartList),
+        newQty: newQty,
       };
 
     case "DELETE_CART_ITEM":
@@ -50,6 +51,7 @@ export const cartReducer = (state, action) => {
         ...state,
         cartList,
         total: totalPrice(cartList),
+        newQty: newQty,
       };
 
     default:
